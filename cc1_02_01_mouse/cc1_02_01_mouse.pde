@@ -6,9 +6,9 @@ void setup() {
 
 void draw() {
   //background(204);
-  float speed = (mouseX - pmouseX)^2 + (mouseY - pmouseY)^2;
+  float speed = pow(mouseX - pmouseX, 2) + pow(mouseY - pmouseY, 2);
   if (!freeze)
-    line(mouseX, 0, mouseX, speed*10);
+    line(mouseX, 0, mouseX, speed/10);
 }
 
 void mousePressed() {
