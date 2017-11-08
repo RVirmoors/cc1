@@ -51,7 +51,7 @@ void moveShip() {
 void drawShip() {
   translate(shipX, shipY);
   rotate(shipAngle);
-  scale(pulseShip());
+  scale( pulseShip() );
   beginShape();
   vertex(-20, 0);
   bezierVertex(13, -15, 0, -30, 0, -30);
