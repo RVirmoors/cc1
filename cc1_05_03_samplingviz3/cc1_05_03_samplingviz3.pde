@@ -26,6 +26,7 @@ void setup() {
   for(int i = 0; i < 10; i++) 
     data[i] = map(data[i], 0, maximum, 0, 255);
 }
+
 void draw() {
   if (reset) {
     drawBg();
