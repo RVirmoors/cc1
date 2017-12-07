@@ -1,6 +1,6 @@
 PImage maze;
 PGraphics pg;  // graphics context
-float factor = 2; // alt zoom
+float factor = .7; // alt zoom
 float zoom = 1; // current zoom
 float transX, transY;
 
@@ -10,11 +10,8 @@ class Guy {
     x = _x; y = _y; 
   }
   void display() {
-    if (zoom == 1) {
+
       pg.ellipse(x, y, 20, 20);
-    } else {
-      pg.ellipse(-transX+width/2/zoom, -transY+height/2/zoom, 20, 20);
-    }
   }
   
   boolean checkTraj(int x1, int y1, int x2, int y2) {
