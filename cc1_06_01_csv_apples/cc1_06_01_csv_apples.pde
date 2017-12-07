@@ -2,12 +2,15 @@
  String dataName[] = new String[3]; // three apple names
  
  String[] stuff = loadStrings("data.csv");
- String values[] = (split(stuff[0], ',')); // delimiter: comma
- for (int i = 0; i < 3; i++) {
+ String values[] = split(stuff[0], ','); // delimiter: comma
+ 
+ dataName = (split(stuff[1], ','));
+ 
+ for (int i = 0; i < values.length; i++) {
    // add "FF" prefix for max alpha (ARGB)
    dataColor[i] = unhex("FF"+values[i]); 
    fill(dataColor[i]);
-   rect(i*10,0,i*10+10,height-1);
+   ellipse(i*30+20,height/2,20,18);
+   text(dataName[i], i*30,height/4);
  }
- dataName = (split(stuff[1], ','));
  printArray(dataName);

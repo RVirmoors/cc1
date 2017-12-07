@@ -42,8 +42,7 @@ void setup() {
 }
 
 void draw() {
-   background(maze); 
-   loadPixels(); // refresh pixels[] array
+   background(maze);
    mazeGuy.display();
    if (mousePressed) {
      mazeGuy.goTo(mouseX, mouseY);

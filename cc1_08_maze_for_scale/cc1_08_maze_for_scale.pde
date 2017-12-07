@@ -1,6 +1,6 @@
 PImage maze;
 PGraphics pg;  // graphics context
-float factor = .7; // alt zoom
+float factor = 2.7; // alt zoom
 float zoom = 1; // current zoom
 float transX, transY;
 
@@ -10,8 +10,7 @@ class Guy {
     x = _x; y = _y; 
   }
   void display() {
-
-      pg.ellipse(x, y, 20, 20);
+      ellipse(x, y, 20, 20);
   }
   
   boolean checkTraj(int x1, int y1, int x2, int y2) {
@@ -55,19 +54,19 @@ void draw() {
    }
          
    pg.loadPixels(); // refresh pixels[] array
-   mazeGuy.display();
+
 
    if (mousePressed) // move player twd mouse
      mazeGuy.goTo(mouseX, mouseY);
 
    pg.endDraw();
    image(pg,0,0); // draw the pg image
+   mazeGuy.display(); // draw ellipse
 }
 
 void altView() {  
-
-  transX = (width / 2 - mazeGuy.x*zoom);///zoom;
-  transY = (height / 2 - mazeGuy.y*zoom);///zoom;
+  transX = (width / 2 - mazeGuy.x*zoom);
+  transY = (height / 2 - mazeGuy.y*zoom);
 
   translate(transX, transY);
   scale(zoom, zoom);
