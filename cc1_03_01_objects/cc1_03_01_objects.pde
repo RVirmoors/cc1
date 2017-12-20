@@ -33,7 +33,8 @@ class Ship {
   
   // constructor
   Ship() {
-    ship.x = width/2; ship.y = height/2;
+    x = width/2; 
+    y = height/2;
   }
   
   // functions:
