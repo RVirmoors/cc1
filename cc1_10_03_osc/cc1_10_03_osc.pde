@@ -38,7 +38,9 @@ void draw() {
 }
 
 void oscEvent(OscMessage theOscMessage) {
-  println(theOscMessage.addrPattern());
+  //println(theOscMessage.addrPattern());
+  String address[] = split(theOscMessage.addrPattern(),"/");
+  int addr = int(address[1]);
   if (theOscMessage.checkAddrPattern("/count")==true) { // new client 
     while (totalShips < theOscMessage.get(0).intValue()) {
       // initialize new ship(s)
@@ -48,8 +50,9 @@ void oscEvent(OscMessage theOscMessage) {
     // if we don't have an Id, then the new client is US!
     if (myId == -1) myId = totalShips-1;  // starting w/ 0
   }
-  else if (theOscMessage.addrInt() != myId) {
-    int sId = theOscMessage.addrInt();
+  else if (addr != myId) {
+    int sId = addr;
+    println(theOscMessage.get(0).floatValue());
     ships[sId].x = theOscMessage.get(0).floatValue();
     ships[sId].y = theOscMessage.get(1).floatValue();
     ships[sId].angle = theOscMessage.get(2).floatValue();
