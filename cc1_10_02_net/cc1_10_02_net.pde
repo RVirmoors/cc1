@@ -29,23 +29,25 @@ void draw() {
     ships[i].draw();
   }
   if (client.available() > 0) {
-    String data = client.readString();
-    println(data);
-    float shipData[] = float(split(data, ","));
-    if (shipData[0] == 666) { // new client 
-      while(totalShips < (int)shipData[1]) {
-        // initialize new ship(s)
-        ships[totalShips] = new Ship();
-        totalShips++;
+    String data = client.readStringUntil('\n');
+    if (data != null) {
+      println(data);
+      float shipData[] = float(split(data, ","));
+      if (shipData[0] == 666) { // new client 
+        while(totalShips < (int)shipData[1]) {
+          // initialize new ship(s)
+          ships[totalShips] = new Ship();
+          totalShips++;
+        }
+        // if we don't have an Id, then the new client is US!
+        if (myId == -1) myId = totalShips-1;  // starting w/ 0
+  
+      } else if (shipData[0] != myId) {
+        int sId = (int)shipData[0];
+        ships[sId].x = shipData[1];
+        ships[sId].y = shipData[2];
+        ships[sId].angle = shipData[3];    
       }
-      // if we don't have an Id, then the new client is US!
-      if (myId == -1) myId = totalShips-1;  // starting w/ 0
-
-    } else if (shipData[0] != myId) {
-      int sId = (int)shipData[0];
-      ships[sId].x = shipData[1];
-      ships[sId].y = shipData[2];
-      ships[sId].angle = shipData[3];    
     }
   }
 }
@@ -60,12 +62,6 @@ void drawBg() {
   }
 }
 
-void clientEvent(Client client) {
-/*  String data = client.read();
-  println(data);/*
-*/
-}
-
 class Ship {
   float x, y, angle, speed;
   int cycle;
@@ -74,6 +70,7 @@ class Ship {
   Ship() {
     x = width/2; 
     y = height/2;
+    angle = 0;
   }
   Ship(float _x, float _y, float _a) {
     x = _x;

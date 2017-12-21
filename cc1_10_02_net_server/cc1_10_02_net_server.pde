@@ -18,13 +18,12 @@ void draw()
   // Get the next available client
   Client thisClient = myServer.available();
   // If the client is not null, and says something, display what it said
-  while (thisClient != null) {
+  if (thisClient != null) {
     String whatClientSaid = thisClient.readString();
+    whatClientSaid = whatClientSaid.trim();
     if (whatClientSaid != null) {
-      myServer.write(whatClientSaid);
-      println(counter);
+      myServer.write(whatClientSaid + "\n");
     }
-    thisClient = myServer.available();
   } 
   text("ships connected: " + counter, 100, 200);
 }
@@ -32,5 +31,5 @@ void draw()
 void serverEvent(Server myServer, Client someClient) {
   println("We have a new client: " + someClient.ip());
   counter++;
-  myServer.write("666," + counter);
+  myServer.write("666," + counter + "\n");
 }
