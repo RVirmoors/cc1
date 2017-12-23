@@ -57,11 +57,13 @@ void oscEvent(OscMessage theOscMessage) {
 
 
 private void disconnect(String theIPaddress) {
-if (myNetAddressList.contains(theIPaddress, myBroadcastPort)) {
+  if (myNetAddressList.contains(theIPaddress, myBroadcastPort)) {
     myNetAddressList.remove(theIPaddress, myBroadcastPort);
        println("### removing "+theIPaddress+" from the list.");
      } else {
        println("### "+theIPaddress+" is not connected.");
      }
-       println("### currently there are "+myNetAddressList.list().size());
+     println("### currently there are "+myNetAddressList.list().size());
+     OscMessage mess = new OscMessage("/disconnected");
+     oscP5.send(mess, myNetAddressList);
  }

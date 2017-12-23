@@ -8,6 +8,7 @@ int listenPort = 12000;
 Ship[] ships;  // ship objects
 int totalShips = 0;
 int myId = -1;
+int toDisconnect = 0;
 
 void setup() {
  size(400, 400); 
@@ -52,11 +53,21 @@ void oscEvent(OscMessage theOscMessage) {
   }
   else if (addr != myId) {
     int sId = addr;
-    println(theOscMessage.get(0).floatValue());
     ships[sId].x = theOscMessage.get(0).floatValue();
     ships[sId].y = theOscMessage.get(1).floatValue();
     ships[sId].angle = theOscMessage.get(2).floatValue();
+    toDisconnect = addr+1;
   }
+  if (theOscMessage.addrPattern().equals("/disconnected")==true) {
+      // remove ship
+      ships[toDisconnect].x = -100;
+      println("disconnecting " + toDisconnect);
+  }
+}
+
+void exit() {
+   OscMessage mess = new OscMessage("/server/disconnect");
+   oscP5.send(mess, myBroadcastLocation);
 }
 
 void drawBg() {
