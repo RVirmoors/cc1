@@ -1,5 +1,5 @@
 void setup() {
-  size(100, 100);
+  size(100, 100); // init screen
   frameRate(0.8);
   textSize(32);
 }
