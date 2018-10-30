@@ -1,4 +1,4 @@
-boolean drawing;
+boolean drawing; // global value
 
 void setup() {
   
