@@ -1,5 +1,5 @@
-PVector p1, p2, p3, p4;
-float l1, l2, l3, l4;
+PVector p1, p2, p3, p4; // coordinates
+float l1, l2, l3, l4; // initial light values
 int dir = 1;
 
 void setup() {
@@ -48,7 +48,6 @@ void drawPoints() {
 }
 
 void sparkle(int which) {
-  
   if (which == 0) {
     if (p1.z > 10)
       dir = -1;
