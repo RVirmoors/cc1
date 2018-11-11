@@ -1,0 +1,17 @@
+BPM 90
+detect "starting..."
+
+EVENT 1/4
+EVENT 1/4
+EVENT 1/2
+	detect S
+
+EVENT 1/2
+EVENT 1/2
+EVENT 1/2
+	detect O
+
+EVENT 1/4
+EVENT 1/4
+EVENT 1/2
+	detect S
