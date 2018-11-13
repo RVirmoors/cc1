@@ -9,7 +9,7 @@
 			"modernui" : 1
 		}
 ,
-		"rect" : [ 67.0, 109.0, 514.0, 480.0 ],
+		"rect" : [ 657.0, 261.0, 514.0, 480.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -130,10 +130,10 @@
 				"box" : 				{
 					"id" : "obj-1",
 					"maxclass" : "newobj",
-					"numinlets" : 2,
+					"numinlets" : 1,
 					"numoutlets" : 4,
 					"outlettype" : [ "", "float", "symbol", "bang" ],
-					"patching_rect" : [ 194.0, 328.0, 129.0, 22.0 ],
+					"patching_rect" : [ 194.0, 328.0, 70.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"Warning" : 1,
 						"ascograph_height" : 768,
@@ -144,7 +144,7 @@
 					}
 ,
 					"style" : "",
-					"text" : "antescofo~ @inlets hz"
+					"text" : "antescofo~"
 				}
 
 			}
