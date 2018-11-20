@@ -9,7 +9,7 @@ print(scaleFactor);
 for (int i = 0; i < x.length; i++) {
   float barHeight = height / x.length;
   fill(0);
-  rect(i*barHeight, 0, barHeight - 4, x[i]*scaleFactor);
+  rect(i*barHeight, height-(x[i]*scaleFactor), barHeight - 4, height);
   fill(255);
-  text(x[i], i*barHeight+10, 0);
+  text(x[i], i*barHeight, height);
 }
