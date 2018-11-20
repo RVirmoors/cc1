@@ -16,8 +16,10 @@ void setup() {
 
 void draw() {
   background(20);
+  // move xpos towards mouse
   float dx = mouseX - xpos;
   xpos = xpos + dx/drag;
+  // draw frame
   drawGif(xpos, ypos, 12);
 }
 
@@ -32,5 +34,5 @@ void loadGif(String imagePrefix, int count) {
 
 void drawGif(float xpos, float ypos, int count) {
   frame = (frame+1) % count;
-  image(images[frame], xpos - images[frame].width, ypos);
+  image(images[frame], xpos - images[frame].width/2, ypos);
 }
