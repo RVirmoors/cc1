@@ -1,0 +1,56 @@
+@FUN_DEF beat2ms($X) {
+	1000*$X*60.0/$RT_TEMPO
+}
+
+$periode:=3
+$delai:= 1/4
+$compteur:=0 
+
+antescofo::tempo 120
+
+loop LoopRef 3
+{
+	mnote1 64 120 @beat2ms(1/4)
+	1/4 mnote1 66 120 @beat2ms(1/4)
+	1/4 mnote1 71 120 @beat2ms(1/4)
+	1/4 mnote1 73 120 @beat2ms(1/4)
+	1/4 mnote1 74 120 @beat2ms(1/4)
+	1/4 mnote1 66 120 @beat2ms(1/4)
+	1/4 mnote1 64 120 @beat2ms(1/4)
+	1/4 mnote1 73 120 @beat2ms(1/4)
+	1/4 mnote1 71 120 @beat2ms(1/4)
+	1/4 mnote1 66 120 @beat2ms(1/4)
+	1/4 mnote1 74 120 @beat2ms(1/4)
+	1/4 mnote1 73 120 @beat2ms(1/4) 
+}
+
+loop LoopDec $periode 
+{ 
+	mnote2 64 120 @beat2ms(1/4)
+	$delai mnote2 66 120 @beat2ms(1/4)
+	$delai mnote2 71 120 @beat2ms(1/4)
+	$delai mnote2 73 120 @beat2ms(1/4)
+	$delai mnote2 74 120 @beat2ms(1/4)
+	$delai mnote2 66 120 @beat2ms(1/4)
+	$delai mnote2 64 120 @beat2ms(1/4)
+	$delai mnote2 73 120 @beat2ms(1/4)
+	$delai mnote2 71 120 @beat2ms(1/4)
+	$delai mnote2 66 120 @beat2ms(1/4)
+	$delai mnote2 74 120 @beat2ms(1/4)
+	$delai mnote2 73 120 @beat2ms(1/4)
+
+	$compteur := ($compteur+1) % 8
+
+	if($compteur = 4)
+	{
+		$periode := $periode-(1/4)/4
+		$delai := $periode / 12
+		print DEPHASING
+	}
+	if($compteur = 0)
+	{
+		$periode := $periode+ (1/4)/4
+		$delai := $periode / 12
+		print IN PHASE	
+	}
+}

@@ -1,0 +1,42 @@
+@FUN_DEF beat2ms($X, $t) {
+	1000*$X*60.0/$t
+}
+
+@proc_def ::rec_proc($ind) {
+	@command("mnote"+$ind) ($notes[$MYSELF.$i]) 120 @beat2ms(1/4,$local_tempo)
+	$MYSELF.$i := ($MYSELF.$i + 1)%12
+	if($ind = 2){
+		$cmpt := ($cmpt + 1) % 96
+	}
+	1/4 ::rec_proc($ind)
+}
+
+$notes := [64,66,71,73,74,66,64,73,71,66,74,73]
+$cmpt:=-1 
+$tempo1:=100
+$tempo2:=$tempo1
+
+group @tempo = $tempo1
+{
+	@local $i
+	$i := 0
+	::rec_proc(1)
+}
+
+group @tempo = $tempo2
+{
+	@local $i
+	$i := 0
+	$proc2 := ::rec_proc(2)
+}
+
+whenever($cmpt = 48)
+{
+	$tempo2 := $tempo1 * (3*4+1/4)/(3*4)
+	print DEPHASING
+}
+whenever($cmpt = 0)
+{
+	$tempo2 := $tempo1
+	print IN PHASE	
+}
