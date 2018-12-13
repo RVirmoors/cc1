@@ -1,0 +1,21 @@
+BPM 60
+
+$slider := 0
+
+whenever cititor ($slider) {
+	scrie $slider
+	if ($slider > 50) {
+		antescofo::nextevent
+	}
+}
+
+EVENT 4 maimare
+	actioneaza 1
+	abort cititor
+	4 actioneaza 2
+	
+whenever ($slider < 15) {
+	antescofo::nextevent
+}
+
+EVENT 4 dupa
