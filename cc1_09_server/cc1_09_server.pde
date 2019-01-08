@@ -20,6 +20,7 @@ void draw() {
   textAlign(CENTER);
   fill(0);
   text("connected: "+nClients, width/2, height/2);
+  
   Client client = server.available();
   if (client != null) {
     int xpos = client.read(); 
@@ -31,8 +32,8 @@ void draw() {
   for (int i = 0; i < nClients; i++) {
     positions = positions + str(position[i]) + ",";
   }
-  print(positions);
-  server.write(positions);
+  text(positions, width/2, 2*height/3);
+  server.write(positions+"\n");
 }
 
 int which(String ip) {

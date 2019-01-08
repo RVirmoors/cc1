@@ -72,7 +72,7 @@ void draw() {
 }
 
 void clientEvent(Client client) {
-  String msg = client.readString();
+  String msg = client.readStringUntil('\n');
   // The value of msg will be null until the 
   // end of the String is reached
   if (msg != null) {
