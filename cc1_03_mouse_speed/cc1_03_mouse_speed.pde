@@ -1,3 +1,5 @@
+// MOUSE SPEED
+
 boolean drawing; // global value
 
 void setup() {
