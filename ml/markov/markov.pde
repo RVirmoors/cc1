@@ -28,7 +28,7 @@ void rec(int s) {
 }
 
 void play(int previous) {
-  next = previous+1;  // CHANGE THIS!!! HOW DO WE GET "next" ?
+  next = (previous+1) % n;  // CHANGE THIS!!! HOW DO WE GET "next" ?
   // ...
   // ...
   
