@@ -8,7 +8,7 @@
  
  for (int i = 0; i < values.length; i++) {
    // add "FF" prefix for max alpha (ARGB)
-   dataColor[i] = values[i]; 
+   dataColor[i] = int(values[i]);
    fill(dataColor[i]);
    ellipse(i*30+20,height/2,20,18);
    text(dataName[i], i*30,height/4);
