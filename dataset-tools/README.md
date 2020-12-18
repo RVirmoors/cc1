@@ -1,14 +1,5 @@
-Subtree of `https://github.com/dvschultz/dataset-tools.git`
-
-To update, run in terminal:
-```
-
-```
-git pull --squash -s subtree https://github.com/dvschultz/dataset-tools.git master --allow-unrelated-histories
----
-
 # dataset-tools
-Tools for quickly normalizing image datasets for machine learning.
+Tools for quickly normalizing image datasets for machine learning. 
 
 # Installation
 ```
