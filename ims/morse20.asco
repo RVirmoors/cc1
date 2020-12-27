@@ -1,0 +1,22 @@
+BPM 60 // one beat = 1s
+
+// ... _ _ _ ...
+
+EVENT 1 Get ready
+EVENT 1
+EVENT 1
+
+EVENT 1/2   S
+    printer S
+EVENT 1/2
+EVENT 1
+
+EVENT 1     O
+    printer O
+EVENT 1
+EVENT 2
+
+EVENT 1/2   S
+    printer S!!!
+EVENT 1/2
+EVENT 1/2

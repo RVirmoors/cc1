@@ -1,5 +1,4 @@
 BPM 110
-harm 0
 
 NOTE F#4 1	m1
 	piano 50	; D
@@ -13,7 +12,6 @@ NOTE C4 1		m2
 NOTE C4 1
 NOTE C4 0.5
 NOTE B3 0.5
-	harm 5
 
 NOTE E4 1		m3
 	piano 48	; C
@@ -23,4 +21,3 @@ NOTE D4 0.5
 NOTE B3 0.5		m4
 	piano 43	; G
 NOTE A3 0.5
-	1/8 harm 0
