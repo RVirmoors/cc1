@@ -1,0 +1,51 @@
+@FUN_DEF beat2ms($X) {
+	1000*$X*60.0/$RT_TEMPO
+}
+
+BPM 100
+
+$period:=3
+$delay:= 1/4
+$counter:=-1
+
+@tempovar $var_sync(70,1)
+
+WHENEVER($var_sync)
+{
+   $counter := $counter + 1
+   if($counter = 0)
+   {
+    	loop  $period @target[4s] @sync $var_sync
+		{
+				mnote2 64 120 @beat2ms(1/4)
+			$delay mnote2 66 120 @beat2ms(1/4)
+			$delay mnote2 71 120 @beat2ms(1/4)
+			$delay mnote2 73 120 @beat2ms(1/4)
+			$delay mnote2 74 120 @beat2ms(1/4)
+			$delay mnote2 66 120 @beat2ms(1/4)
+			$delay mnote2 64 120 @beat2ms(1/4)
+			$delay mnote2 73 120 @beat2ms(1/4)
+			$delay mnote2 71 120 @beat2ms(1/4)
+			$delay mnote2 66 120 @beat2ms(1/4)
+			$delay mnote2 74 120 @beat2ms(1/4)
+			$delay mnote2 73 120 @beat2ms(1/4)
+
+
+			if(($counter%24) = 12)
+			{
+				$period := $period-(1/4)/4
+				$delay := $period / 12
+				print DEPHASING
+			}
+			if(($counter%24) = 0)
+			{
+				$period := $period+ (1/4)/4
+				$delay := $period / 12
+				print IN PHASE
+			}
+		}
+
+   	}
+}
+
+NOTE 60 2

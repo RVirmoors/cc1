@@ -1,0 +1,54 @@
+BPM 100
+
+$counter:=-1 
+@tempovar $var_sync(100,1)
+
+$beat := 1
+$lat := 100
+svp play 0
+
+
+WHENEVER($var_sync)
+{
+   $counter := $counter + 1
+   if($counter = 0)
+   {	
+    	$start := $NOW
+		$pos_sec := NIM{0. 0., 0. 0.}
+		startrec 1
+   }else{
+		$pos_sec := @push_back($pos_sec, 1, ($NOW-$start))
+   }
+
+   if($counter = 3)
+   {
+	svp play 1
+	$pos := -1
+	loop l $beat @target [4s] @sync $var_sync
+	{
+
+	   if(($counter%24) = 12 )
+	   {
+		$beat := 1 - (1/(4*12))
+		print DEPHASING
+	   }
+	   if(($counter%24) = 0 )
+	   {
+		$beat := 1
+		print IN PHASE
+	   }
+	   $pos := $pos + 1
+	   abort c
+	   curve c @Grain := 0.05 s , @Action := ScrubPos ($pos_sec($x) * 1000 + $lat) (0.05 * 1000)
+	   {
+		$x
+		{
+				{ $pos }
+			$beat { ($pos + 1)  }
+		}
+	   }	
+	}
+}
+}
+
+NOTE 60 2

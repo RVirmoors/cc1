@@ -1,0 +1,16 @@
+BPM 60
+
+$slider := 0
+
+whenever Printer ($slider) {
+    print $slider
+}
+
+whenever W ($slider > 100) {
+    antescofo::nextevent
+}
+
+EVENT 1 unu
+    0.5 abort W
+
+EVENT 1 doi

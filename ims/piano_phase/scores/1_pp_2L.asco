@@ -1,0 +1,56 @@
+@FUN_DEF beat2ms($X) {
+	1000*$X*60.0/$RT_TEMPO
+}
+
+$period:=3   // duration of loop
+$delay:= 1/4 // duration of notes
+$counter:=0
+
+antescofo::tempo 120
+
+loop LoopRef 3
+{
+	mnote1 64 120 @beat2ms(1/4)
+	1/4 mnote1 66 120 @beat2ms(1/4)
+	1/4 mnote1 71 120 @beat2ms(1/4)
+	1/4 mnote1 73 120 @beat2ms(1/4)
+	1/4 mnote1 74 120 @beat2ms(1/4)
+	1/4 mnote1 66 120 @beat2ms(1/4)
+	1/4 mnote1 64 120 @beat2ms(1/4)
+	1/4 mnote1 73 120 @beat2ms(1/4)
+	1/4 mnote1 71 120 @beat2ms(1/4)
+	1/4 mnote1 66 120 @beat2ms(1/4)
+	1/4 mnote1 74 120 @beat2ms(1/4)
+	1/4 mnote1 73 120 @beat2ms(1/4)
+}
+
+loop LoopDec $period
+{
+	mnote2 64 120 @beat2ms(1/4)
+	$delay mnote2 66 120 @beat2ms(1/4)
+	$delay mnote2 71 120 @beat2ms(1/4)
+	$delay mnote2 73 120 @beat2ms(1/4)
+	$delay mnote2 74 120 @beat2ms(1/4)
+	$delay mnote2 66 120 @beat2ms(1/4)
+	$delay mnote2 64 120 @beat2ms(1/4)
+	$delay mnote2 73 120 @beat2ms(1/4)
+	$delay mnote2 71 120 @beat2ms(1/4)
+	$delay mnote2 66 120 @beat2ms(1/4)
+	$delay mnote2 74 120 @beat2ms(1/4)
+	$delay mnote2 73 120 @beat2ms(1/4)
+
+	$counter := ($counter+1) % 8 // 0 1 2 ... 7
+
+	if($counter = 4)
+	{
+		$period := $period-(1/4)/4
+		$delay := $period / 12
+		print DEPHASING
+	}
+	if($counter = 0)
+	{
+		$period := $period+ (1/4)/4
+		$delay := $period / 12
+		print IN PHASE
+	}
+}
