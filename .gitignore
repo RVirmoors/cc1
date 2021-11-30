@@ -64,3 +64,4 @@ venv/
 *.jpg
 Backup/
 Lib/
+*.pkl
