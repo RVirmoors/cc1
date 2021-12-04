@@ -9,7 +9,7 @@ else:
 
 from fastai.vision.all import *
 
-path = Path('c:/Users/rv/Documents/cc1/ml/python-weki/data') #Path().resolve() # current path
+path = Path('D:\LYON 2021/cc1/ml/python-weki/data') #Path().resolve() # current path
 dls = ImageDataLoaders.from_folder(path, train='.', valid_pct=0.1, bs=8, num_workers=0) # num_workers=0 avoids forking
 print(dls.valid_ds.items[:3])
 
@@ -24,4 +24,4 @@ print( learn.predict('data/pull/10.jpg') )
 DIR = 'data/models/'
 noFiles = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
 pickleName = 'models/classifier' + str(noFiles) + '.pkl'
-learn.export(fname=pickleName)
+#learn.export(fname=pickleName)
