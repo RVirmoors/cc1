@@ -65,3 +65,4 @@ venv/
 Backup/
 Lib/
 *.pkl
+*.pth
