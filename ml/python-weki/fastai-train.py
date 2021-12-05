@@ -16,9 +16,9 @@ print(dls.valid_ds.items[:3])
 learn = cnn_learner(dls, resnet34, metrics=error_rate)
 #print(learn.lr_find())
 
-learn.fine_tune(3, 0.001)
+learn.fine_tune(6, 0.002)
 
-print( learn.predict('data/pull/10.jpg') )
+print( learn.predict('data/both/both10.jpg') )
 
 # Export our trained model in form of pickle file
 DIR = 'data/models/'

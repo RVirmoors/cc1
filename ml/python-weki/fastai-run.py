@@ -23,7 +23,7 @@ print("Loaded model: " + pickleName)
 print(next(learn.model.parameters()).is_cuda)
 
 # create spout object
-spout = Spout(silent = False, width = 1280, height = 720, n_rec = 3)
+spout = Spout(silent = False, width = 704, height = 576, n_rec = 3)
 # create receiver
 spout.createReceiver('input1', id = 0)
 spout.createReceiver('input2', id = 1)
