@@ -11,12 +11,12 @@ from fastai.vision.all import *
 
 path = Path('D:/LYON 2021/cc1/ml/python-weki/data') #Path().resolve() # current path
 dls = ImageDataLoaders.from_folder(path, train='.', valid_pct=0.1, bs=8, num_workers=0) # num_workers=0 avoids forking
-print(dls.valid_ds.items[:3])
+print(dls.valid_ds.items[:])
 
 learn = cnn_learner(dls, resnet34, metrics=error_rate)
 #print(learn.lr_find())
 
-learn.fine_tune(6, 0.002)
+learn.fine_tune(20, 0.002)
 
 print( learn.predict('data/both/both10.jpg') )
 
