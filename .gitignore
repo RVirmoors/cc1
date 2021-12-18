@@ -62,7 +62,7 @@ $RECYCLE.BIN/
 venv/
 venv37/
 .vscode/
-*.jpg
+# *.jpg
 Backup/
 Lib/
 *.pkl
