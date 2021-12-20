@@ -46,7 +46,7 @@ https://github.com/justinpinkney/awesome-pretrained-stylegan3
 @click.command()
 @click.pass_context
 @click.option('--network', '-net', 'network_pkl', help='Network pickle filename', default="https://api.ngc.nvidia.com/v2/models/nvidia/research/stylegan2/versions/1/files/stylegan2-ffhq-512x512.pkl", show_default=True)
-@click.option('--init-lr', '-lr', 'initial_learning_rate', type=float, help='Initial learning rate of the optimization process', default=0.1, show_default=True)
+@click.option('--init-lr', '-lr', 'initial_learning_rate', type=float, help='Initial learning rate of the optimization process', default=0.02, show_default=True)
 @click.option('--trunc', 'truncation_psi', type=float, help='Truncation psi to use in projection when using a projection seed', default=0.7, show_default=True)
 # =======================
 
@@ -115,7 +115,7 @@ def run_projection(
         spout.check()
         # receive data
         data = spout.receive()
-        #data = align_face(data, G.img_resolution)
+        # data = align_face(data, G.img_resolution) ## TOO SLOW !!!
         #print(data.shape)
         
         # Features for target image. Reshape to 256x256 if it's larger to use with VGG16
