@@ -1,9 +1,4 @@
 """
-adapted the below to work with np.arrays
-"""
-
-
-"""
 brief: face alignment with FFHQ method (https://github.com/NVlabs/ffhq-dataset)
 author: lzhbrian (https://lzhbrian.me)
 date: 2020.1.5
@@ -33,27 +28,24 @@ import dlib
 # download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 predictor = dlib.shape_predictor('./shape_predictor_68_face_landmarks.dat')
 
-def get_landmark(img):
+def get_landmark(filepath):
     """get landmark with dlib
     :return: np.array shape=(68, 2)
     """
     detector = dlib.get_frontal_face_detector()
 
-    #img = dlib.load_rgb_image(filepath)
+    img = dlib.load_rgb_image(filepath)
     dets = detector(img, 1)
-    shape = []
 
-    # print("Number of faces detected: {}".format(len(dets)))
-    if len(dets) == 0:
-        return np.array([False])
-
+    print("Number of faces detected: {}".format(len(dets)))
     for k, d in enumerate(dets):
-        # print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
-        #    k, d.left(), d.top(), d.right(), d.bottom()))
+        print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
+            k, d.left(), d.top(), d.right(), d.bottom()))
         # Get the landmarks/parts for the face in box d.
         shape = predictor(img, d)
-        # print("Part 0: {}, Part 1: {} ...".format(shape.part(0), shape.part(1)))
-        
+        print("Part 0: {}, Part 1: {} ...".format(shape.part(0), shape.part(1)))
+
+
     t = list(shape.parts())
     a = []
     for tt in t:
@@ -63,15 +55,13 @@ def get_landmark(img):
     return lm
 
     
-def align_face(img, output_size):
+def align_face(filepath):
     """
-    :param img: np.array
-    :return: np.array
+    :param filepath: str
+    :return: PIL Image
     """
 
-    lm = get_landmark(img)
-    if not np.any(lm):
-        return img
+    lm = get_landmark(filepath)
     
     lm_chin          = lm[0  : 17]  # left-right
     lm_eyebrow_left  = lm[17 : 22]  # left-right
@@ -102,9 +92,11 @@ def align_face(img, output_size):
     quad = np.stack([c - x - y, c - x + y, c + x + y, c + x - y])
     qsize = np.hypot(*x) * 2
 
-    # read image
-    img = PIL.Image.fromarray(img)
 
+    # read image
+    img = PIL.Image.open(filepath)
+
+    output_size=512
     transform_size=4096
     enable_padding=True
 
@@ -145,4 +137,4 @@ def align_face(img, output_size):
         img = img.resize((output_size, output_size), PIL.Image.ANTIALIAS)
 
     # Save aligned image.
-    return np.array(img)
+    return img
