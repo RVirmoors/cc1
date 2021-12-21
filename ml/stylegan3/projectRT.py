@@ -1,26 +1,20 @@
-import time
-import dlib # requires cmake
-import numpy as np
-from align_face import align_face
-from Library.Spout import Spout
-
-
 import os
 import sys
 sys.path.append('stylegan3-fun')
+sys.path.append('Spout-for-Python')
+
+#import dlib # requires cmake
+#from align_face import align_face
+import numpy as np
+from Library.Spout import Spout
 
 import copy
 from time import perf_counter
 
 import click
-from typing import List, Tuple
-import imageio
-import PIL.Image
-
 import torch
 import torch.nn.functional as F
 
-from tqdm import tqdm
 import dnnlib
 from dnnlib.util import format_time
 import legacy
@@ -31,23 +25,12 @@ from pytorch_ssim import SSIM  # from https://github.com/Po-Hsun-Su/pytorch-ssim
 from network_features import VGG16FeaturesNVIDIA, DiscriminatorFeatures
 from metrics import metric_utils
 
-"""
-https://github.com/AmarSaini/Epoching_StyleGan2_Setup
-https://amarsaini.github.io/Epoching-Blog/jupyter/2020/08/10/Latent-Space-Exploration-with-StyleGAN2.html
-https://lambdalabs.com/blog/stylegan-3/
-https://rvirmoors.github.io/2021/01/04/realtime-stylegan/
-https://rvirmoors.github.io/ccia/gans-interactive-inference
-https://github.com/RVirmoors/cc1/blob/master/ml/python-weki/fastai-classify.ipynb
-https://github.com/justinpinkney/awesome-pretrained-stylegan
-https://github.com/justinpinkney/awesome-pretrained-stylegan3
-"""
 
 # =======================
 @click.command()
 @click.pass_context
 @click.option('--network', '-net', 'network_pkl', help='Network pickle filename', default="https://api.ngc.nvidia.com/v2/models/nvidia/research/stylegan2/versions/1/files/stylegan2-ffhq-512x512.pkl", show_default=True)
 @click.option('--init-lr', '-lr', 'initial_learning_rate', type=float, help='Initial learning rate of the optimization process', default=0.02, show_default=True)
-@click.option('--trunc', 'truncation_psi', type=float, help='Truncation psi to use in projection when using a projection seed', default=0.7, show_default=True)
 # =======================
 
 
@@ -55,7 +38,6 @@ def run_projection(
         ctx: click.Context,
         network_pkl: str,
         initial_learning_rate: float,
-        truncation_psi: float,
         w_avg_samples: int = 10000,
         initial_noise_factor: float = 0.05,
         regularize_noise_weight: float = 1e5,
