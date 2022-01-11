@@ -1,7 +1,6 @@
 import os
 import sys
 sys.path.append('stylegan3-fun')
-sys.path.append('Spout-for-Python')
 
 #import dlib # requires cmake
 #from align_face import align_face
