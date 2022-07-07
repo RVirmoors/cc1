@@ -1,17 +1,20 @@
 class Spaceship {
   float x, y, angle, speed;
   char accelKey;
+  ParticleSystem ps;
 
   Spaceship() {
     x = width/2;
     y = height/2;
     accelKey = ' ';
+    ps = new ParticleSystem(new PVector(x, y));
   }
   
   Spaceship(char _k) {
     x = width/2;
     y = height/2;
     accelKey = _k;
+    ps = new ParticleSystem(new PVector(x, y));
   }
 
   void move() {
@@ -45,6 +48,7 @@ class Spaceship {
 
   void draw() {
     fill(255);
+    strokeWeight(2);
     pushMatrix();
     translate(x, y);
     rotate(angle);
@@ -56,6 +60,9 @@ class Spaceship {
     vertex(-20, 0);
     endShape();
     popMatrix();
+    ps.move(x, y, angle);
+    ps.addParticle();
+    ps.run();
   }
 
   float pulseShip() {

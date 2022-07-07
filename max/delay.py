@@ -15,4 +15,3 @@ dispatcher.map("/input", in_bang)
 
 server = BlockingOSCUDPServer(("127.0.0.1", 6448), dispatcher)
 server.serve_forever()
-
