@@ -28,7 +28,7 @@ from metrics import metric_utils
 # =======================
 @click.command()
 @click.pass_context
-@click.option('--network', '-net', 'network_pkl', help='Network pickle filename', default="https://api.ngc.nvidia.com/v2/models/nvidia/research/stylegan2/versions/1/files/stylegan2-ffhq-512x512.pkl", show_default=True)
+@click.option('--network', '-net', 'network_pkl', help='Network pickle filename', default="E:\sg3-pretrained\stylegan2-afhqdog-512x512.pkl", show_default=True)
 @click.option('--init-lr', '-lr', 'initial_learning_rate', type=float, help='Initial learning rate of the optimization process', default=0.02, show_default=True)
 # =======================
 
@@ -54,7 +54,7 @@ def run_projection(
         G = legacy.load_network_pkl(fp)['G_ema'].requires_grad_(False).to(device)
 
     # Open Spout stream for target images
-    spout = Spout(silent = False, width = 1044, height = 1088) # TODO set W and H to 720p ?
+    spout = Spout(silent = False, width = 640, height = 480) # TODO set W and H to 720p ?
     spout.createReceiver('input')
     spout.createSender('output')
 
@@ -76,8 +76,10 @@ def run_projection(
     lr = initial_learning_rate # learning rate is constant
 
     # Load the VGG16 feature detector.
-    url = 'https://api.ngc.nvidia.com/v2/models/nvidia/research/stylegan3/versions/1/files/metrics/vgg16.pkl'
+    url = 'e:/sg3-pretrained/metrics/vgg16.pkl'
     vgg16 = metric_utils.get_feature_detector(url, device=device)
+
+    print("Loaded vgg16...")
 
     w_opt = w_avg.clone().detach().requires_grad_(True)
     optimizer = torch.optim.Adam([w_opt] + list(noise_buffs.values()), betas=(0.9, 0.999), lr=initial_learning_rate)
