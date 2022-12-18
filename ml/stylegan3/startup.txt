@@ -1,0 +1,24 @@
+1. Download CUDA, Python and pre-trained .pkl files
+
+https://www.python.org/downloads/release/python-3913/
+https://catalog.ngc.nvidia.com/orgs/nvidia/teams/research/models/stylegan3/files 
+
+2. Create new folder, open in VS Code
+
+2. Run in terminal:
+
+python -m venv venv
+
+2a.1. Create a 'libs' folder in venv/Scripts
+2a.2. Copy python39.lib from your Python39/libs folder to your venv/Scripts/libs. Then keep executing in terminal:
+
+venv/Scripts/activate.bat
+
+python -m pip install light-the-torch
+ltt install torch
+
+git clone https://github.com/PDillis/stylegan3-fun.git
+pip install click requests scipy ninja imageio imageio-ffmpeg tdqm imgui glfw pyopengl matplotlib
+
+cd stylegan3-fun
+python gen_images.py --outdir=out --trunc=1 --seeds=0-4 --network=c:/YOUR-DOWNLOAD-FOLDER/stylegan3-r-afhqv2-512x512.pkl

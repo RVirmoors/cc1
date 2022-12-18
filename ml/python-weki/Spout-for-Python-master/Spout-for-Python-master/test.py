@@ -5,9 +5,9 @@ def main() :
     # create spout object
     spout = Spout(silent = False)
     # create receiver
-    spout.createReceiver('input')
+    spout.createReceiver('maxSender')
     # create sender
-    spout.createSender('output')
+    #spout.createSender('output')
 
     while True :
 
@@ -15,8 +15,9 @@ def main() :
         spout.check()
         # receive data
         data = spout.receive()
+        # print(len(data))
         # send data
-        spout.send(data)
+        #spout.send(data)
     
 if __name__ == "__main__":
     main()
