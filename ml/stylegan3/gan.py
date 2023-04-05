@@ -55,7 +55,7 @@ def setup():
 
 def update():
     global spout, device, G, psi, z
-    print("Generate image.")
+    # print("Generate image.")
     server.handle_request() # get new OSC
     # check on close window
     spout.check()
@@ -71,7 +71,7 @@ def update():
 
     img = G(z, label, truncation_psi=psi, noise_mode='const')
     img = (img.permute(0, 2, 3, 1) * 127.5 + 128).clamp(0, 255).to(torch.uint8)
-    print(img.shape)
+    # print(img.shape)
     data = img[0].cpu().numpy()
     # send data
     spout.send(data)
