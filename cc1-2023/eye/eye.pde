@@ -7,8 +7,11 @@ int timer = 0;
 float x;
 float f;
 
+PShape eyeModel;
+
 void setup() {
-  size(500, 500);
+  size(500, 500, P3D);
+  eyeModel = loadShape("eye.obj");
 }
 
 void bgCerc() {
@@ -18,6 +21,16 @@ void bgCerc() {
 }
 
 void draw() {
+  background(0);
+  lights();
+  camera(0, 0, height * 0.09,
+    0, 0, 0,
+    0, 1, 0);
+  shape(eyeModel, 0, -height * 0.01);
+  eyeModel.rotateY(.01);
+
+  
+  /*
   motion = (mouseX != pmouseX);
   sound = mousePressed;
 
@@ -65,4 +78,5 @@ void draw() {
 
   println("sound: " + sound);
   println(state);
+  */
 }
