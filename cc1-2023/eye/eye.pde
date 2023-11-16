@@ -31,13 +31,11 @@ void draw() {
   lights();
 
   shape(eyeModel, 0, height * -0.062);
+  println(mouseX);
 
-  if (mouseX > 30 || mouseX < width-30) {
-    eyeModel.rotateY(float(mouseX - pmouseX) / -180);
-  }
-
-
-
+  pushMatrix();
+  eyeModel.rotateY(float(mouseX - pmouseX) / -180);
+  popMatrix();
 
   /*
   motion = (mouseX != pmouseX);
