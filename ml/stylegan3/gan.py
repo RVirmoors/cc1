@@ -15,7 +15,8 @@ import torch
 
 import legacy
 
-network_pkl = "E:/sg3-pretrained/stylegan2-afhqwild-512x512.pkl"
+# network_pkl = "E:/sg3-pretrained/stylegan2-afhqwild-512x512.pkl"
+network_pkl = "D:/Lorena/Training-colaje/stylegan3-funn/training-runs/00023-stylegan2-arzstef-512-gpus1-batch8-gamma6.5536-resume_ffhq512/network-snapshot-000160.pkl"
 
 # ---- OSC -----
 from pythonosc.dispatcher import Dispatcher
@@ -28,7 +29,9 @@ def get_psi(address, *args):
 
 def get_z(address, *args):
     global z
+    print("args: ", args)
     z = torch.from_numpy(np.array(args).reshape(1, 512)).to(device)
+    print("z: ", z)
 
 dispatcher = Dispatcher()
 dispatcher.map("/psi", get_psi)

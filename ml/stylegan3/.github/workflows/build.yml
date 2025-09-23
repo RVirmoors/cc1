@@ -1,0 +1,59 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ 'windows-latest' ]
+        python-version: [ '3.7', '3.8', '3.9', '3.10' ]
+
+    runs-on: ${{ matrix.os }}
+
+    name: ${{ github.event.inputs.tag }} python ${{ matrix.python-version }} on ${{ matrix.os }}
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Switch to Workspace
+        run: |
+          echo ${{ github.workspace }}
+          cd ${{ github.workspace }}
+
+      - uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Download Boost
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.zip -OutFile boost_1_78_0.zip
+          Expand-Archive boost_1_78_0.zip
+          mv .\boost_1_78_0\boost_1_78_0\ boost
+
+      # build python-boost
+      - name: Build boost-python lib
+        run: |
+          cd boost
+          ls .
+          ./bootstrap.bat
+          ./b2.exe --stagedir=./stage/x64 address-model=64 --build-type=complete --toolset=msvc --threading=multi --runtime-link=shared --variant=release
+          ls ./stage/x64
+
+      # run build command
+      - name: Build spout
+        run: |
+          cd "${{ github.workspace }}"
+          cd SpoutSDK
+          mkdir build
+          msbuild "Spout for Python.sln" /property:Configuration=Release /p:OutputPath=build /p:BoostDir="${{ github.workspace }}/boost" /p:PythonDir="${{ env.pythonLocation }}"
+          ls build
+          ls x64\Release
+          cp x64\Release\SpoutSDK.dll SpoutSDK.pyd
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: SpoutSDK.pyd for Python ${{ matrix.python-version }}
+          path: ${{ github.workspace }}/SpoutSDK/SpoutSDK.pyd

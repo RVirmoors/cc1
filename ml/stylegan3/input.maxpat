@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 1,
+			"minor" : 6,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, -1003.0, 1534.0, 969.0 ],
+		"rect" : [ 34.0, 77.0, 1852.0, 929.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -173,7 +173,7 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 502.833323657512665, 22.333333849906921, 18.0, 34.0 ],
 					"size" : 2,
-					"value" : 1
+					"value" : 0
 				}
 
 			}
@@ -346,7 +346,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 694.5, 350.000002562999725, 94.0, 20.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 265.166653871536255, 160.333333849906921, 94.0, 20.0 ],
+					"presentation_rect" : [ 274.0, 160.333333849906921, 94.0, 20.0 ],
 					"text" : "add in / out pair"
 				}
 
@@ -956,11 +956,15 @@
 				"type" : "mx64"
 			}
 , 			{
-				"name" : "fluid.libmanipulation.mxe64",
+				"name" : "fluid.dataset~.mxe64",
 				"type" : "mx64"
 			}
 , 			{
 				"name" : "fluid.list2buf.mxe64",
+				"type" : "mx64"
+			}
+, 			{
+				"name" : "fluid.mlpregressor~.mxe64",
 				"type" : "mx64"
 			}
  ],
